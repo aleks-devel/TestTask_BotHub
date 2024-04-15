@@ -1,0 +1,1 @@
+export const joiConfig = { abortEarly: false, stripUnknown: true }

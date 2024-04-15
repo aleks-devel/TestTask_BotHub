@@ -1,0 +1,41 @@
+version: '3.8'
+
+services:
+  postgresql:
+    extends:
+      file: docker-compose.base.yml
+      service: postgresql
+    networks:
+      - project
+
+  pgadmin:
+    extends:
+      file: docker-compose.base.yml
+      service: pgadmin
+    networks:
+      - project
+
+  app-server:
+    depends_on:
+      - postgresql
+    build:
+      context: ./
+      dockerfile: DockerFile
+      target: development
+    environment:
+      NODE_ENV: development
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./:/usr/src/app
+    networks:
+      - project
+
+volumes:
+  db:
+    driver: local
+  pgadmin_data:
+    driver: local
+
+networks:
+  project:
