@@ -18,10 +18,11 @@ export class CronApiProvider {
         console.error(reason);
       });
     });
-    provider.getDataFromApi().catch((reason) => {
-      console.error("[cron job] Error:");
-      console.error(reason);
-    });
+    // DEBUG: Раскомментировать для теста запроса
+    // provider.getDataFromApi().catch((reason) => {
+    //   console.error("[cron job] Error:");
+    //   console.error(reason);
+    // });
   }
 
   private async getDataFromApi() {
